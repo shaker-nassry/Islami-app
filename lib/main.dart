@@ -6,6 +6,7 @@ import 'package:islami/providers/app_cofig_provider.dart';
 import 'package:islami/quran/soradetails.dart';
 import 'package:islami/settings.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'hometabs/home_screen.dart';
 
@@ -16,10 +17,12 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-//  const MyApp({key? key}) : super(key: key) ;
+  late AppConfigprovider provider;
+
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<AppConfigprovider>(context);
+    initSharedPref();
     return MaterialApp(
       initialRoute: HomeScreen.routename,
       routes: {
@@ -27,9 +30,6 @@ class MyApp extends StatelessWidget {
         "Soradetails": (context) => Soradetails(),
         "hadeth details": (context) => hadethdetails(),
         "Settingstab": (context) => Settingstab(),
-
-        //  "Login" :(context) => LoginScreen() ,
-        //  "Login" :(context) => LoginScreen() ,
       },
       theme: MyTheme.lightmode,
       darkTheme: MyTheme.darkmode,
@@ -39,5 +39,17 @@ class MyApp extends StatelessWidget {
       locale: Locale(provider.applang),
       themeMode: provider.appTheme,
     );
+  }
+
+  void initSharedPref() async {
+    final prefs = await SharedPreferences.getInstance();
+    String langPrefs = prefs.getString('language') ?? 'en';
+    String themePrefs = prefs.getString('theme') ?? 'light';
+    provider.changelang(langPrefs);
+    if (themePrefs == 'light') {
+      provider.changetheme(ThemeMode.light);
+    } else if (themePrefs == 'dark') {
+      provider.changetheme(ThemeMode.dark);
+    }
   }
 }

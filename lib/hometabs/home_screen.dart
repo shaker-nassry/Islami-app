@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islami/hadeth/hadethtab.dart';
 import 'package:islami/hometabs/radiotab.dart';
 import 'package:islami/hometabs/sebhatab.dart';
-import 'package:islami/providers/app_cofig_provider.dart';
+import 'package:islami/providers/app_config_provider.dart';
 import 'package:islami/quran/qurantab.dart';
 import 'package:islami/settings.dart';
 import 'package:provider/provider.dart';

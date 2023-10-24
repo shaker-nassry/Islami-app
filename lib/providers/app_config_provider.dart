@@ -11,8 +11,8 @@ class AppConfigprovider extends ChangeNotifier {
       return;
     }
     applang = newlang;
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setString('language', applang);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('lan', applang);
     notifyListeners();
   }
 
@@ -21,8 +21,9 @@ class AppConfigprovider extends ChangeNotifier {
       return;
     }
     appTheme = newtheme;
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setString('theme', appTheme == ThemeMode.light ? 'light' : 'dark');
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString(
+        'theme', appTheme == ThemeMode.light ? 'light' : 'dark');
     notifyListeners();
   }
 
